@@ -58,7 +58,32 @@ def time_is_available(all_times, time):
 # Given a time, return the next available cohort member
 def assign_cohort_member(all_times, time):
 	slots = all_times[time]
+	# Add available members to a set
+	available_cohort_members = []
 	for cohort_member, playtester in slots.items():
 		if playtester == "FREE":
-			return cohort_member
-	return ""
+			available_cohort_members.append(cohort_member)
+	if len(available_cohort_members) == 0:
+		return ""
+	# Pick the one with the least playtests done so far
+	chosen_member = available_cohort_members[0]
+	for member in available_cohort_members:
+		if get_frequency_of(all_times, member) < get_frequency_of(all_times, chosen_member):
+			chosen_member = member
+	return chosen_member
+
+# Get how many playtests they're scheduled for
+def get_frequency_of(all_times, name):
+	frequency = {}
+	for time, slots in all_times.items():
+		for cohort_member, playtester in slots.items():
+			if playtester == "FREE":
+				continue
+			if cohort_member in frequency:
+				frequency[cohort_member] += 1
+			else:
+				frequency[cohort_member] = 0
+	if name not in frequency:
+		return 0
+	else:
+		return frequency[name]
