@@ -1,8 +1,9 @@
 
 
-def start_search(all_times, playtesters):
+def start_search(all_times, playtesters, preferred_matches):
+	# Get order of playtesters in a list
 	playtester_order = list(playtesters.keys())
-	print(playtester_order)
+	# Start backtracking search
 	valid = backtracking_search(all_times, playtesters, playtester_order)
 	print("\n")
 	if valid:

@@ -4,6 +4,7 @@ import search
 # Get input data from files
 cohort_slots = loader.get_cohort_slots()
 playtesters = loader.get_playtester_slots()
+preferred_matches = loader.get_preferred_matches()
 
 # Initialize data
 all_times = {
@@ -22,7 +23,7 @@ for time, slots in all_times.items():
 		slots[member] = "FREE"
 
 # Start search
-search.start_search(all_times, playtesters)
+search.start_search(all_times, playtesters, preferred_matches)
 
 # Save all_times to json file
 loader.store_final_slots(all_times)

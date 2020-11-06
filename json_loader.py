@@ -17,6 +17,10 @@ def get_cohort_slots():
             times[str(available_time)].append(name)
     return times
 
+def get_preferred_matches():
+    data = get_json_as_object("preferred_matches.json")
+    return data
+
 def get_playtester_slots():
     data = get_json_as_object("playtester_slots.json")
     for name, times in data.items():
