@@ -1,4 +1,5 @@
 import copy
+import random
 
 def start_search(all_times, playtesters, preferred_matches):
 	# Get order of playtesters in a list
@@ -53,7 +54,9 @@ def backtracking_search(all_times, playtesters, playtester_order, p=0):
 
 	# Iterate through all possible times
 	time_available = False
-	for time in playtesters[current_playtester]:
+	shuffled_times = playtesters[current_playtester]
+	random.shuffle(shuffled_times)
+	for time in shuffled_times:
 		print("  Trying time " + time)
 		valid_time = False
 
@@ -97,11 +100,11 @@ def assign_cohort_member(all_times, time):
 		return ""
 	# Pick the one with the least playtests done so far
 	chosen_member = available_cohort_members[0]
-	print(str(get_frequency_of(all_times, chosen_member)) + " is the lowest ")
+	# print("      " + str(get_frequency_of(all_times, chosen_member)) + " is the lowest ")
 	for member in available_cohort_members:
 		if get_frequency_of(all_times, member) < get_frequency_of(all_times, chosen_member):
 			chosen_member = member
-			print(chosen_member + " is new member with " + str(get_frequency_of(all_times, chosen_member)))
+			# print("      " + chosen_member + " is new member with " + str(get_frequency_of(all_times, chosen_member)))
 	return chosen_member
 
 # Get how many playtests they're scheduled for

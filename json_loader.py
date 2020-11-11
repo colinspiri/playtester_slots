@@ -15,7 +15,17 @@ def get_cohort_slots():
 
 def get_preferred_matches():
     data = get_json_as_object("preferred_matches.json")
-    return data
+    # Prune people that haven't signed up
+    playtester_slots = get_playtester_slots()
+    pruned_data = {}
+    for cohort_member, list_of_people in data.items():
+        pruned_list = []
+        for playtester in list_of_people:
+            if playtester in playtester_slots:
+                pruned_list.append(playtester)
+        if len(pruned_list) > 0:
+            pruned_data[cohort_member] = pruned_list
+    return pruned_data
 
 def get_playtester_slots():
     data = get_json_as_object("playtester_slots.json")
