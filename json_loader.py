@@ -4,13 +4,9 @@ def get_cohort_slots():
     data = get_json_as_object("cohort_slots.json")
     times = {
         "200": [],
-        "215": [],
         "230": [],
-        "245": [],
         "300": [],
-        "315": [],
-        "330": [],
-        "345": []
+        "330": []
     }
     for name, available_times in data.items():
         for available_time in available_times:

@@ -49,12 +49,12 @@ def backtracking_search(all_times, playtesters, playtester_order, p=0):
 		print("backtracking_search()...")
 
 	current_playtester = playtester_order[p]
-	# print("Current playtester = " + current_playtester + ", p = " + str(p))
+	print("Current playtester = " + current_playtester + ", p = " + str(p))
 
 	# Iterate through all possible times
 	time_available = False
 	for time in playtesters[current_playtester]:
-		# print("  Trying time " + time)
+		print("  Trying time " + time)
 		valid_time = False
 
 		# If time is valid, assign all variables
@@ -65,19 +65,19 @@ def backtracking_search(all_times, playtesters, playtester_order, p=0):
 		
 		# If time was picked, recurse
 		if valid_time:
-			# print("  Picked " + time)
+			print("  Picked " + time)
 			valid = backtracking_search(all_times, playtesters, playtester_order, p + 1)
 			# If recursing results in blockages, pick another time
 			if not valid:
 				# Unassign all variables
-				# print("Back to playtester = " + current_playtester + ", p = " + str(p))
+				print("Back to playtester = " + current_playtester + ", p = " + str(p))
 				all_times[time][cohort_member] = "FREE"
 				continue
 			else:
 				return True
 	# If no time was found, return false
 	if not time_available:
-		# print("  No time was found, backtracking...")
+		print("  No time was found, backtracking...")
 		return False
 
 
@@ -97,9 +97,11 @@ def assign_cohort_member(all_times, time):
 		return ""
 	# Pick the one with the least playtests done so far
 	chosen_member = available_cohort_members[0]
+	print(str(get_frequency_of(all_times, chosen_member)) + " is the lowest ")
 	for member in available_cohort_members:
 		if get_frequency_of(all_times, member) < get_frequency_of(all_times, chosen_member):
 			chosen_member = member
+			print(chosen_member + " is new member with " + str(get_frequency_of(all_times, chosen_member)))
 	return chosen_member
 
 # Get how many playtests they're scheduled for
@@ -112,7 +114,7 @@ def get_frequency_of(all_times, name):
 			if cohort_member in frequency:
 				frequency[cohort_member] += 1
 			else:
-				frequency[cohort_member] = 0
+				frequency[cohort_member] = 1
 	if name not in frequency:
 		return 0
 	else:
