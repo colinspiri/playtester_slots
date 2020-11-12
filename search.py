@@ -25,6 +25,7 @@ def start_search(all_times, playtesters, preferred_matches):
 						valid = backtracking_search(all_times_copy, playtesters, playtester_order)
 						if valid:
 							found_match = True
+							playtester_order.remove(playtester)
 						else:
 							all_times[time][cohort_member] = "FREE"
 						break
