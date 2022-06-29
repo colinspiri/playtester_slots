@@ -3,10 +3,12 @@ import json
 def get_cohort_slots():
     data = get_json_as_object("cohort_slots.json")
     times = {
-        "200": [],
-        "230": [],
-        "300": [],
-        "330": []
+        "1000": [],
+        "1020": [],
+        "1040": [],
+        "1100": [],
+        "1120": [],
+        "1140": []
     }
     for name, available_times in data.items():
         for available_time in available_times:

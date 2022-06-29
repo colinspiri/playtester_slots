@@ -8,10 +8,12 @@ preferred_matches = loader.get_preferred_matches()
 
 # Initialize data
 all_times = {
-	"200": {},
-	"230": {},
-	"300": {},
-	"330": {}
+	"1000": {},
+	"1020": {},
+	"1040": {},
+	"1100": {},
+	"1120": {},
+	"1140": {}
 }
 for time, slots in all_times.items():
 	cohort_members = cohort_slots[time]
